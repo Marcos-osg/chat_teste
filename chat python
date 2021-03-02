@@ -1,0 +1,169 @@
+#chatbot para automatizar vendas
+import os
+#lista apenas pra finalizar pedido e mostrar pro usuario. 
+#dá pra usar arquivo = open  ou fazer um select no banco
+lista_cx = ['Caixa MPT Cat6 4 pares  R$ 500,00','Caixa Furukawa SOHO Plus Cat6 4 pares R$ 560,00']
+lista_bob = ['ASU 80 2km 6FO  R$2442','Fibra optica DROP OIW R$450','Fibra optica DROP Transcend R$400']
+lista_cx5e = ['Caixa lan expert 4 pares R$300,00','Caixa MPT Cat5e 350,00','Caixa Hypex Cat5e R$320,00','Caixa Rei do Cabo R$150,00']
+processadores = ['Processador Intel Core i3 R$700,00','Intel Core i5 R$890,00','Intel Core i7 R$1.100','Intel Core i9 R$2.600']
+placa_mae = ['Biostar H110  R$400,00','Asrock H270 R$700,00','Gigabyte B250 R$ 640,00']
+memoria = ['DDR-4 4GB 2400 Mhz Patriot R$160,00','DDR-4 8GB 2400 Mhz G-skill R$280,00','DDR-4 16GB 3200 Mhz Tridend-z Royal R$ 1.900']
+
+#funçoes
+
+def esc_ped(nome,ped_final):
+  print('Deseja prosseguir com o pedido? ')
+  esc_ped = input('[1] - sim   [2]- nao   --> ')
+  if esc_ped == '1':
+    ''' print(f'Obrigado {nome}, em breve sua solicitação será processada') '''
+    finaliza(nome,ped_final)
+  elif esc_ped == '2':
+    print('Finalizando o pedido, você será redirecionado para o inicio')
+    apresentar()
+  else:
+    print('opçao invalida')
+
+def escolha(nome,escolha_opc):
+  if escolha_opc == '1':
+    cabos(nome,escolha_opc)
+  elif escolha_opc == '2':
+    informatica(nome,escolha_opc)
+  elif escolha_opc == '3':
+    exit()
+  else:
+    print('Escolha uma opção valida')
+
+def finaliza(nome,ped_final):
+  print(f'Obrigado {nome}, em breve sua solicitação será processada')
+  arquivo = open("pedido1 x.txt","a")
+  arquivo.write(f'{nome},{ped_final}')
+  arquivo = open("pedido1 x.txt","r")
+  print(arquivo.readline())
+
+def cabos(nome,escolha_opc):
+  print('[1] - caixas')
+  print('[2] - bobinas')
+  escolha_cabo = input('Digite a opção: ')
+  if escolha_cabo =='1':
+    print('Temos as caixas de cabos nos seguintes modelos:')
+    print('[1] Cat 6 - MPT e Furukawa')
+    print('[2] Cat 5e - Lan Expert, MPT, Hypex, Rei do cabo')
+    esc_cx= input('Digite novamente a opção: ')
+    if esc_cx == '1':
+      print('[1] -',lista_cx[0])
+      print('[2] -',lista_cx[1])
+      ped_final = input('escolha: ')
+      if ped_final == '1':
+        ped_final = lista_cx[0]
+      elif ped_final == '2':
+        ped_final = lista_cx[1]
+      else:
+        print('opcção invalida')
+      esc_ped(nome,ped_final)
+    elif esc_cx == '2':
+      print('[1] - ',lista_cx5e[0])
+      print('[2] - ',lista_cx5e[1])
+      print('[3] - ',lista_cx5e[2])
+      print('[4] - ',lista_cx5e[3])
+      ped_final = input('escolha: ')
+      if ped_final == '1':
+        ped_final = lista_cx5e[0]
+      elif ped_final == '2':
+        ped_final = lista_cx5e[1]
+      elif ped_final == '3':
+        ped_final = lista_cx5e[2]
+      elif ped_final == '4':
+        ped_final = lista_cx5e[3]
+      else:
+        print('opcção invalida')
+      esc_ped(nome,ped_final)
+    else:
+      print('Escolha uma opção valida')
+  elif escolha_cabo =='2':
+    print('Temos as bobinas nos seguintes modelos:')
+    print('[1] - ',lista_bob[0])
+    print('[2] - ',lista_bob[1])
+    print('[3] - ',lista_bob[2])
+    ped_final = input('escolha: ')
+    if ped_final == '1':
+      ped_final = lista_bob[0]
+    elif ped_final == '2':
+      ped_final = lista_bob[1]
+    elif ped_final =='3':
+      ped_final = lista_bob[2]
+    else:
+      print('opcção invalida')
+    esc_ped(nome,ped_final)
+  else:
+    print('Escolha uma opção valida')
+  
+def informatica(nome, escolha_opc):
+  print('[1] - processadores')
+  print('[2] - placa mãe')
+  print('[3] - memórias')
+  print('[0] - Voltar')
+  escolha_informatica = input('Digite a opção: ')
+  if escolha_informatica == '1':
+    print('[1] - ',processadores[0])
+    print('[2] - ',processadores[1])
+    print('[3] - ',processadores[2])
+    print('[4] - ',processadores[3])
+    ped_final = input('escolha: ')
+    if ped_final == '1':
+      ped_final = processadores[0]
+    elif ped_final == '2':
+      ped_final = processadores[1]
+    elif ped_final == '3':
+      ped_final = processadores[2]
+    elif ped_final == '4':
+      ped_final = processadores[3]
+    else:
+      print('opcção invalida')
+    esc_ped(nome,ped_final)
+  if escolha_informatica == '2':
+    print('[1] - ',placa_mae [0])
+    print('[2] - ',placa_mae [1])
+    print('[3] - ',placa_mae [2])
+    ped_final = input('escolha: ')
+    if ped_final == '1':
+      ped_final = placa_mae [0]
+    elif ped_final == '2':
+      ped_final = placa_mae [1]
+    elif ped_final == '3':
+      ped_final = placa_mae [2]
+    else:
+      print('opcção invalida')
+    esc_ped(nome,ped_final)
+  if escolha_informatica == '3':
+    print('[1] - ',memoria [0])
+    print('[2] - ',memoria [1])
+    print('[3] - ',memoria [2])
+    ped_final = input('escolha: ')
+    if ped_final == '1':
+      ped_final = memoria [0]
+    elif ped_final == '2':
+      ped_final = memoria [1]
+    elif ped_final == '3':
+      ped_final = memoria [2]
+    else:
+      print('opcção invalida')
+    esc_ped(nome,ped_final)
+
+def apresentar():
+  print('Olá. Seja bem vindo ao canal de vendas, ganhe tempo fazendo seu pedido'+
+          ' atraves do sistema de chat. para prosseguir com sua solicitação'+
+          ' insira seu nome e selecione uma categoria nas opções abaixo')
+  nome = input('Digite seu nome: ')
+  print('______________________________________________________________________')
+  print('[1] - Cabos - caixas, bobinas')
+  print('[2] - Informática - processadores, memorias, placas mães')
+  print('[0] - Sair')
+  escolha_opc = input('Digite o numero da opção -> ')
+  escolha(nome,escolha_opc)
+    
+
+    
+
+    
+
+apresentar()
